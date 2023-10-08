@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
+import { useState } from "react";
+import { useEffect } from "react";
 import {
   Text,
   StyleSheet,
   View,
-  ImageBackground,
   TouchableOpacity,
   Image,
   Modal,
@@ -11,12 +12,31 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-const BookingSeats = () => {
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+const BookingSeats = ({ screenIdentifier }) => {
   const initialSeatColors = Array(20).fill("white");
 
   const [seatColors, setSeatColors] = useState(initialSeatColors);
   const [modalVisible, setModalVisible] = useState(false);
   const [bookedSeats, setBookedSeats] = useState([]);
+
+  useEffect(() => {
+    // Load booked seats from AsyncStorage using the screenIdentifier
+    AsyncStorage.getItem(`bookedSeats_${screenIdentifier}`).then((data) => {
+      if (data) {
+        const loadedBookedSeats = JSON.parse(data);
+        // Update the local state with the loaded data
+        setBookedSeats(loadedBookedSeats);
+
+        // Update the seatColors based on the loaded data
+        const newSeatColors = initialSeatColors.map((color, index) =>
+          loadedBookedSeats.includes(index + 1) ? "green" : "white"
+        );
+        setSeatColors(newSeatColors);
+      }
+    });
+  }, [screenIdentifier]);
 
   const changeSeatColor = (seatIndex) => {
     const newSeatColors = [...seatColors];
@@ -31,6 +51,12 @@ const BookingSeats = () => {
       }
     });
     setBookedSeats(newBookedSeats);
+
+    // Store the updated booked seats in AsyncStorage using the screenIdentifier
+    AsyncStorage.setItem(
+      `bookedSeats_${screenIdentifier}`,
+      JSON.stringify(newBookedSeats)
+    );
   };
 
   const generateBookingMessage = () => {

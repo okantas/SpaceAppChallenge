@@ -9,7 +9,7 @@ const MoonToMars = () => {
       source={require("../images/space.jpeg")}
     >
       <Text style={styles.title}>LET'S GO TO MARS</Text>
-      <BookingSeats />
+      <BookingSeats screenIdentifier="Screen9" />
     </ImageBackground>
   );
 };
