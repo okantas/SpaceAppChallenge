@@ -1,6 +1,6 @@
-<h1>X-Ticket</h1>
+<h1>S-Ticket</h1>
 
-<p> X-ticket is a mobile application which provide you to select a ticket to travel between planets. </p>
+<p> S-ticket is a mobile application which provide you to select a ticket to travel between planets. </p>
 <p> I coded this application on React native and also used Expo as Emulator. </p>
 <h2>Screens explanation</h2>
 <p>1-First Screen is simple, there is one button on it as a down below </p>
