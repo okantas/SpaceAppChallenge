@@ -28,7 +28,7 @@
   src="src/images/venusSeats.png"
   alt="seats"
   style="display: inline-block; margin: 10 auto; width: 100px">
-<p>6-Finally yoou can selected the seats and click for booking, have safe travel!!!</p>
+<p>6-Finally you can selected the seats and click for booking, have safe travel!!!</p>
  <img
   src="src/images/seatsSelected.png"
   alt="seats"
